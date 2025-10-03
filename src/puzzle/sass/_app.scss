@@ -1,0 +1,33 @@
+@use "variable";
+
+$minHeight: 100px;
+
+body {
+  display: grid;
+  grid-template-rows: $minHeight 250px $minHeight;
+  grid-template-columns: 150px 250px;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+
+.header {
+  grid-area: header;
+  background-color: variable.$navy;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: variable.$green;
+}
+
+.main {
+  grid-area: main;
+  background-color: variable.$red;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: variable.$brown;
+}

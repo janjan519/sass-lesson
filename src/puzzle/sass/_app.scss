@@ -1,0 +1,76 @@
+@use "variable";
+@use "mixin";
+
+$minHeight: 100px;
+
+body {
+  display: grid;
+  grid-template-rows: $minHeight 250px $minHeight;
+  grid-template-columns: 150px 250px;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+
+.header {
+  grid-area: header;
+  background-color: variable.$navy;
+
+  &__list {
+    height: 60px;
+    width: 160px;
+    margin: 20px 20px 20px auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: variable.$white;
+
+    $classNames: variable.$classNames;
+    $colors: variable.$buttonColor;
+
+    @each $className, $color in zip($classNames, $colors) {
+      & > li.#{$className} {
+        background-color: $color;
+      }
+    }
+
+    & > li {
+      @include mixin.li;
+    }
+  }
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: variable.$green;
+}
+
+.main {
+  grid-area: main;
+  background-color: variable.$red;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  padding-left: 40px;
+
+  $classNames: variable.$classNames;
+  $colors: variable.$buttonColor;
+
+  @each $className, $color in zip($classNames, $colors) {
+    & > section.#{$className} {
+      background-color: $color;
+    }
+  }
+
+  & > section {
+    @include mixin.section;
+    border: 5px solid variable.$white;
+    margin-bottom: 10px;
+  }
+}
+
+.footer {
+  grid-area: footer;
+  background-color: variable.$brown;
+}
